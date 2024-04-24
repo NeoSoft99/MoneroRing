@@ -11,11 +11,15 @@
 
 using MoneroSharp.Utils;
 using MoneroRing.Crypto;
+using static System.Net.Mime.MediaTypeNames;
+using System.Text;
 
-Console.WriteLine("Hello, C# Monero!");
+string data = "MoneroRing library";
+Console.WriteLine(data);
 
-byte[] hash = new byte[32];
-RingSig.generate_random_bytes(hash, 32);
+byte[] data_bytes = Encoding.UTF8.GetBytes(data);
+var keccak256 = new Nethereum.Util.Sha3Keccack();
+byte[] hash = keccak256.CalculateHash(data_bytes);
 
 byte[] sec1 = new byte[32];
 byte[] pub1 = new byte[32];
