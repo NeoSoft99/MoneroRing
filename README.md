@@ -9,6 +9,10 @@ required to generate and validate key images and ring signatures, which are the 
 MoneroRing references and extends MoneroSharp library created by Oğuzhan Eroğlu,
 which implements cryptographic operations with Monero keys and addresses.
 
+## Unit tests
+The unit tests cover several basic crypto functions and the main ones such as generate_key_image, generate_ring_signature, and check_ring_signature.
+The test data, including expected results, is taken from Monero test data which ensures 100% compatibility with the original C/C++ implementation.
+
 ## License
 
 The MIT License (MIT)
