@@ -25,11 +25,18 @@ These are passed between methods by value, using the ref or out keywords.
 The byte[] buffers must almost always be allocated before they are passed as method parameters.
 ### Generating keys
 
-The following call will generate a random pair of private and public keys that can be used in ring signature:
+The following call generates a random pair of private and public keys that can be used in ring signature:
 ```
 byte[] sec1 = new byte[32];
 byte[] pub1 = new byte[32];
 RingSig.generate_keys(pub1, sec1);
+```
+### Generating key image
+
+The following call generates a key image of the given key:
+```
+byte[] image = new byte[32];
+RingSig.generate_key_image(pub1, sec1, image);
 ```
 
 ## License
