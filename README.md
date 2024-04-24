@@ -54,7 +54,7 @@ pubs[1] = pub2;
 pubs[2] = pub3;
 byte[] sig = RingSig.generate_ring_signature(hash, image, pubs, 3, sec2, 1);
 ```
-### Generating ring signature
+### Validating ring signature
 The following call validates ring signature:
 ```
 bool ring_is_valid = RingSig.check_ring_signature(hash, image, pubs, 3, sig);
