@@ -23,7 +23,7 @@ as this is handled by standard garbage collection.
 Many objects are implemented as structs, which do not require explicit memory allocation or instance creation.
 These are passed between methods by value, using the ref or out keywords.
 The byte[] buffers must almost always be allocated before they are passed as method parameters.
-## Generating key pair
+### Generating keys
 
 The following call will generate a random pair of private and public keys that can be used in ring signature:
 ```
