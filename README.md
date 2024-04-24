@@ -14,6 +14,7 @@ which implements cryptographic operations with Monero keys and addresses.
 The MIT License (MIT)
 
 Copyright (c) 2024 MystSafe LLC (https://mystsafe.com)
+
 Copyright (c) 2024 crypticana <crypticana@proton.me> 
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
