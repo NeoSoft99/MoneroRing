@@ -54,7 +54,7 @@ Key images are a fundamental component in certain cryptographic protocols, parti
 ### Importance in privacy-centric cryptocurrencies
 In privacy-focused cryptocurrencies like Monero, key images are crucial for balancing anonymity with the integrity of the transaction system. They allow the network to verify the legitimacy of transactions without linking them back to individual users’ identities, thereby supporting both privacy and security.
 
-## Application of key kmages in MystSafe
+## Application of key images in MystSafe
 **License token transactions:** In MystSafe, each license token (representing the right to use services such as data storage or transmission) is associated with a unique key image. This key image is generated from the private key of the license holder, who initiates the transaction.
 
 **Prevention of double-spending:** When a user performs a data transaction—such as transferring a license token to another account or using it to access a service—the key image for that token is recorded on MystSafe’s ledger. This ledger allows to verify that each key image has not been used before, thereby ensuring that each license token is spent only once.
