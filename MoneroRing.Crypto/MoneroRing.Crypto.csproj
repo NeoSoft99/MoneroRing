@@ -2,14 +2,20 @@
 
   <PropertyGroup>
     <Product>MoneroRing</Product>
-    <Version>1.0.0</Version>
+    <Version>1.0.2</Version>
     <Author>crypticana (crypticana@proton.me)</Author>
     <Company>MystSafe LLC</Company>
     <Copyright>Copyright (C) 2024 MystSafe LLC, crypticana</Copyright>
     <Description>MoneroRing is C# .NET implementation of Monero ring signatures and key images</Description>
-    <TargetFramework>net7.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <TargetFrameworks>net7.0;net8.0</TargetFrameworks>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Title>MoneroRing library</Title>
+    <PackageProjectUrl>https://github.com/MystSafe</PackageProjectUrl>
+    <PackageLicenseUrl>https://github.com/MystSafe/MoneroRing/blob/main/LICENSE</PackageLicenseUrl>
+    <RepositoryUrl>https://github.com/MystSafe/MoneroRing</RepositoryUrl>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
   </PropertyGroup>
 
   <ItemGroup>

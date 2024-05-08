@@ -10,10 +10,11 @@
     
     <LangVersion>8.0</LangVersion>
     <!--<TargetFrameworks>net6.0; net5.0; net48; net472; netstandard2.1; netstandard2.0</TargetFrameworks>-->
-    <TargetFramework>net7.0</TargetFramework>
     <Nullable>enable</Nullable>
 
     <NoWarn>8602, 8603, 8604</NoWarn>
+
+    <TargetFrameworks>net7.0;net8.0</TargetFrameworks>
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">

@@ -75,6 +75,9 @@ which implements cryptographic operations with Monero keys and addresses.
 The unit tests cover several basic crypto functions and the main ones such as generate_key_image, generate_ring_signature, and check_ring_signature.
 The test data, including expected results, is taken from Monero test data which ensures 100% compatibility of binary inputs and outputs with the original C/C++ implementation.
 
+## Framework versions
+The library supports .NET7.0 and .NET8.0.
+
 ## Using MoneroRing
 
 ### Memory management
