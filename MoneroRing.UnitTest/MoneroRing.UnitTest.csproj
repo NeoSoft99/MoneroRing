@@ -23,7 +23,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\MoneroSharp\MoneroSharp.csproj" />
     <ProjectReference Include="..\MoneroRing.Crypto\MoneroRing.Crypto.csproj" />
   </ItemGroup>
 </Project>

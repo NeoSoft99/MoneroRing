@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <Product>MoneroRing</Product>
-    <Version>1.0.2</Version>
+    <Version>1.0.4</Version>
     <Author>crypticana (crypticana@proton.me)</Author>
     <Company>MystSafe LLC</Company>
     <Copyright>Copyright (C) 2024 MystSafe LLC, crypticana</Copyright>
@@ -11,17 +11,16 @@
     <Nullable>enable</Nullable>
     <TargetFrameworks>net7.0;net8.0</TargetFrameworks>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Title>MoneroRing library</Title>
+    <Title>MoneroRing Crypto Library</Title>
     <PackageProjectUrl>https://github.com/MystSafe</PackageProjectUrl>
-    <PackageLicenseUrl>https://github.com/MystSafe/MoneroRing/blob/main/LICENSE</PackageLicenseUrl>
     <RepositoryUrl>https://github.com/MystSafe/MoneroRing</RepositoryUrl>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
   </PropertyGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\MoneroSharp\MoneroSharp.csproj" />
-  </ItemGroup>
   <ItemGroup>
     <PackageReference Include="BouncyCastle.Cryptography" Version="2.3.0" />
+    <PackageReference Include="Crc32.NET" Version="1.2.0" />
+    <PackageReference Include="Nethereum.Util" Version="4.20.0" />
+    <None Include="LICENSE" Pack="true" PackagePath=""/>
   </ItemGroup>
 </Project>
