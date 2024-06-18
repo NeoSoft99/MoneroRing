@@ -2,7 +2,7 @@
 
 public static partial class RingSig
 {
-    static void sc_reduce32(byte[] s)
+    public static void sc_reduce32(byte[] s)
     {
         long s0 = 2097151 & load_3(s, 0);
         long s1 = 2097151 & (load_4(s, 2) >> 5);

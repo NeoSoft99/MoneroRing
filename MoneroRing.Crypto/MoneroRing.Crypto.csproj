@@ -2,10 +2,10 @@
 
   <PropertyGroup>
     <Product>MoneroRing</Product>
-    <Version>1.0.4</Version>
+    <Version>1.0.5</Version>
     <Author>crypticana (crypticana@proton.me)</Author>
-    <Company>MystSafe LLC</Company>
-    <Copyright>Copyright (C) 2024 MystSafe LLC, crypticana</Copyright>
+    <Company>MystSafe</Company>
+    <Copyright>Copyright (C) 2024 MystSafe, crypticana</Copyright>
     <Description>MoneroRing is C# .NET implementation of Monero ring signatures and key images</Description>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
@@ -14,13 +14,14 @@
     <Title>MoneroRing Crypto Library</Title>
     <PackageProjectUrl>https://github.com/MystSafe</PackageProjectUrl>
     <RepositoryUrl>https://github.com/MystSafe/MoneroRing</RepositoryUrl>
-    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <PackageIcon>android-chrome-256x256.png</PackageIcon>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="BouncyCastle.Cryptography" Version="2.3.0" />
     <PackageReference Include="Crc32.NET" Version="1.2.0" />
     <PackageReference Include="Nethereum.Util" Version="4.20.0" />
     <None Include="LICENSE" Pack="true" PackagePath=""/>
+    <None Include="android-chrome-256x256.png" Pack="true" PackagePath=""/>
   </ItemGroup>
 </Project>
