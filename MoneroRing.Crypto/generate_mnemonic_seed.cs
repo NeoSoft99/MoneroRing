@@ -2,24 +2,37 @@ namespace MoneroRing.Crypto;
 
 public static partial class RingSig
 {
-    // Converts any random seed of any length to the seed
-    // suitable for generating Monero mnemonic. 
-    // input (seed_bytes): random seed, any length 
-    // output (seed_bytes): Monero mnemonic-compatible seed
-    // returns:
-    //     true if success; seed_bytes contains modified seed
-    //     false if interim_seed is not compatible
-    public static bool generate_mnemonic_seed(byte[] seed_bytes)
+    /// <summary>
+    /// Converts any random seed of any length to the seed suitable for generating Monero mnemonic.
+    /// </summary>
+    /// <param name="initial_seed">Random seed, any length.</param>
+    /// <param name="mnemonic_seed">Monero mnemonic-compatible seed, 32 bytes (or null if result is false).</param>
+    /// <returns>
+    /// <c>true</c> if success; <paramref name="mnemonic_seed"/> contains the mnemonic seed.
+    /// <c>false</c> if the resulting mnemonic seed is not compatible.
+    /// </returns>
+    public static bool generate_mnemonic_seed(byte[] initial_seed, out byte[] mnemonic_seed)
     {
-        if (seed_bytes == null || seed_bytes.Length < 32)
+        if (initial_seed == null || initial_seed.Length < 32)
+        {
+            mnemonic_seed = null;
             return false;
+        }
+        
         var keccak256 = new Nethereum.Util.Sha3Keccack();
-        byte[] interim_seed = keccak256.CalculateHash(seed_bytes);
-        if (!less32(interim_seed, limit))
+        mnemonic_seed = keccak256.CalculateHash(initial_seed);
+        
+        if (!less32(mnemonic_seed, limit))
+        {
+            mnemonic_seed = null;
             return false;
-        sc_reduce32(interim_seed);
-        if (sc_isnonzero(interim_seed) != 0)
+        }
+
+        sc_reduce32(mnemonic_seed);
+        if (sc_isnonzero(mnemonic_seed) != 0)
             return true;
+        
+        mnemonic_seed = null;
         return false;
     }
 }
