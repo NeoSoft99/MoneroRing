@@ -47,3 +47,5 @@ Console.WriteLine("ring HEX: " + MoneroUtils.BytesToHex(sig));
 
 var ring_is_valid = RingSig.check_ring_signature(hash, image, pubs, 3, sig);
 Console.WriteLine("ring is valid: " + ring_is_valid.ToString());
+
+string mnemonic_12_string = "";
