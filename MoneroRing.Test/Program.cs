@@ -1,9 +1,9 @@
 ﻿/*
- * MoneroRing, C# .NET implementation of Monero ring signature and key image
+ * MoneroRing, C# .NET implementation of Monero signature, ring signature, and key image
  * 
  * Github: 
  * 
- * Copyright (C) 2024, MystSafe LLC (https://mystsafe.com)
+ * Copyright (C) 2024, MystSafe (https://mystsafe.com)
  * Copyright (C) 2024, Author: crypticana <crypticana@proton.me> 
  *
  * Licensed under MIT (See LICENSE file)
@@ -14,7 +14,7 @@ using MoneroRing.Crypto;
 using static System.Net.Mime.MediaTypeNames;
 using System.Text;
 
-string data = "MoneroRing library";
+string data = "MoneroRing library simple test";
 Console.WriteLine(data);
 
 byte[] data_bytes = Encoding.UTF8.GetBytes(data);
@@ -34,18 +34,26 @@ RingSig.generate_keys(pub3, sec3);
 
 byte[] image = new byte[32];
 RingSig.generate_key_image(pub2, sec2, image);
+Console.WriteLine("Key image: " + MoneroUtils.BytesToHex(image));
 
 var pubs = new byte[3][];
 pubs[0] = pub1;
 pubs[1] = pub2;
 pubs[2] = pub3;
 
-byte[] sig = RingSig.generate_ring_signature(hash, image, pubs, 3, sec2, 1);
+Console.WriteLine("Generating Monero ring signature");
+byte[] ring_sig = RingSig.generate_ring_signature(hash, image, pubs, 3, sec2, 1);
 
-Console.WriteLine("ring length: " + sig.Length.ToString());
-Console.WriteLine("ring HEX: " + MoneroUtils.BytesToHex(sig));
+Console.WriteLine("ring signature length: " + ring_sig.Length.ToString());
+Console.WriteLine("ring signature: " + MoneroUtils.BytesToHex(ring_sig));
 
-var ring_is_valid = RingSig.check_ring_signature(hash, image, pubs, 3, sig);
-Console.WriteLine("ring is valid: " + ring_is_valid.ToString());
+var ring_is_valid = RingSig.check_ring_signature(hash, image, pubs, 3, ring_sig);
+Console.WriteLine("ring signature is valid: " + ring_is_valid.ToString());
 
-string mnemonic_12_string = "";
+Console.WriteLine("Generating Monero signature");
+var sig = RingSig.generate_signature(hash, pub1, sec1);
+Console.WriteLine("sig length: " + sig.Length.ToString());
+Console.WriteLine("sig: " + MoneroUtils.BytesToHex(sig));
+var sig_is_valid = RingSig.check_signature(hash, pub1, sig);
+Console.WriteLine("sig is valid: " + sig_is_valid.ToString());
+

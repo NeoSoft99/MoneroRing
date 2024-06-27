@@ -1,4 +1,4 @@
-using System;
+/*using System;
 
 namespace MoneroSharp.NaCl.Internal.Ed25519Ref10
 {
@@ -43,7 +43,7 @@ namespace MoneroSharp.NaCl.Internal.Ed25519Ref10
                 m[i] = 0;
             mlen = smlen - 64;
             return 0;
-        }*/
+        }#1#
 
         public static bool crypto_sign_verify(
             byte[] sig, int sigoffset,
@@ -77,4 +77,4 @@ namespace MoneroSharp.NaCl.Internal.Ed25519Ref10
             return result;
         }
     }
-}
+}*/

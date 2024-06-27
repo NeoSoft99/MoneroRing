@@ -1,4 +1,4 @@
-using System;
+/*using System;
 using MoneroSharp.NaCl.Internal.Ed25519Ref10;
 //using System.Diagnostics.Contracts;
 
@@ -220,4 +220,4 @@ namespace MoneroSharp.NaCl
                 privateKeySeed.Array, privateKeySeed.Offset);
         }
     }
-}
+}*/

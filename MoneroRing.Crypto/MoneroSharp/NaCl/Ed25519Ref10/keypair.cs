@@ -1,3 +1,4 @@
+/*
 using System;
 
 namespace MoneroSharp.NaCl.Internal.Ed25519Ref10
@@ -21,3 +22,4 @@ namespace MoneroSharp.NaCl.Internal.Ed25519Ref10
         }
     }
 }
+*/

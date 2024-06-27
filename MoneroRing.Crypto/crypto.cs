@@ -114,6 +114,14 @@ public static partial class RingSig
         {
             return c.Concat(r).ToArray();
         }
+        
+        public static signature FromByteArray(byte[] sig_buffer)
+        {
+            signature sig = new signature();
+            Array.Copy(sig_buffer, 0, sig.c, 0, 32);
+            Array.Copy(sig_buffer, 32, sig.r, 0, 32);
+            return sig;
+        }
     }
 
     public struct RingSignature

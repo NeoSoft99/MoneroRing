@@ -23,7 +23,8 @@ public class UnitTest_generate_ring_signature
         var pubs = new byte[1][];
         pubs[0] = pub_0;
         byte[] sig = RingSig.generate_ring_signature(prefix_hash, image, pubs, pubs_count, sec, sec_index);
-
+        //Assert.Equal(expected_signature, sig);
+        
         bool check_result = RingSig.check_ring_signature(prefix_hash, image, pubs, pubs_count, sig);
 
         Assert.True(check_result);
@@ -40,13 +41,15 @@ public class UnitTest_generate_ring_signature
         byte[] pub_0 = MoneroUtils.HexBytesToBinary(pub_0_hex);
         byte[] pub_1 = MoneroUtils.HexBytesToBinary(pub_1_hex);
         byte[] sec = MoneroUtils.HexBytesToBinary(sec_hex);
-
+        byte[] expected_signature = MoneroUtils.HexBytesToBinary(expected_signature_hex);
+        
         var pubs = new byte[2][];
         pubs[0] = pub_0;
         pubs[1] = pub_1;
-        byte[] sig = RingSig.generate_ring_signature(prefix_hash, image, pubs, pubs_count, sec, sec_index);
-
-        bool check_result = RingSig.check_ring_signature(prefix_hash, image, pubs, pubs_count, sig);
+        byte[] actual_sig = RingSig.generate_ring_signature(prefix_hash, image, pubs, pubs_count, sec, sec_index);
+        //Assert.Equal(expected_signature, actual_sig);
+        
+        bool check_result = RingSig.check_ring_signature(prefix_hash, image, pubs, pubs_count, actual_sig);
 
         Assert.True(check_result);
     }

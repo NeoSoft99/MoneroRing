@@ -2,7 +2,7 @@ using System;
 using System.Linq;
 using System.Numerics;
 using System.Runtime.CompilerServices;
-using System.Diagnostics.Contracts;
+//using System.Diagnostics.Contracts;
 
 namespace MoneroSharp.NaCl
 {
@@ -21,7 +21,9 @@ namespace MoneroSharp.NaCl
         /// <returns>True if arrays are equal</returns>
         public static bool ConstantTimeEquals(byte[] x, byte[] y)
         {
-            Contract.Requires<ArgumentNullException>(x != null && y != null);
+            //Contract.Requires<ArgumentNullException>(x != null && y != null);
+            if (x == null || y == null)
+                throw new ArgumentNullException("Arrays x and y cannot be null.");
             if (x.Length != y.Length)
                 return false;
             return InternalConstantTimeEquals(x, 0, y, 0, x.Length) != 0;
@@ -40,7 +42,9 @@ namespace MoneroSharp.NaCl
         /// <returns>True if contents of x and y are equal</returns>
         public static bool ConstantTimeEquals(ArraySegment<byte> x, ArraySegment<byte> y)
         {
-            Contract.Requires<ArgumentNullException>(x.Array != null && y.Array != null);
+            //Contract.Requires<ArgumentNullException>(x.Array != null && y.Array != null);
+            if (x.Array == null || y.Array == null)
+                throw new ArgumentNullException("Arrays x and y cannot be null.");
             if (x.Count != y.Count)
                 return false;
             return InternalConstantTimeEquals(x.Array, x.Offset, y.Array, y.Offset, x.Count) != 0;
@@ -62,10 +66,19 @@ namespace MoneroSharp.NaCl
         /// <returns>True if sequences are equal</returns>
         public static bool ConstantTimeEquals(byte[] x, int xOffset, byte[] y, int yOffset, int length)
         {
-            Contract.Requires<ArgumentNullException>(x != null && y != null);
-            Contract.Requires<ArgumentOutOfRangeException>(xOffset >= 0 && yOffset >= 0 && length >= 0);
-            Contract.Requires<ArgumentException>(xOffset + length <= x.Length);
-            Contract.Requires<ArgumentException>(yOffset + length <= y.Length);
+            // Contract.Requires<ArgumentNullException>(x != null && y != null);
+            // Contract.Requires<ArgumentOutOfRangeException>(xOffset >= 0 && yOffset >= 0 && length >= 0);
+            // Contract.Requires<ArgumentException>(xOffset + length <= x.Length);
+            // Contract.Requires<ArgumentException>(yOffset + length <= y.Length);
+            if (x == null || y == null)
+                throw new ArgumentNullException("Arrays x and y cannot be null.");
+            if (xOffset < 0 || yOffset < 0 || length < 0)
+                throw new ArgumentOutOfRangeException("Offsets and length must be non-negative.");
+            if (xOffset + length > x.Length)
+                throw new ArgumentException("xOffset and length exceed array x length.");
+            if (yOffset + length > y.Length)
+                throw new ArgumentException("yOffset and length exceed array y length.");
+
 
             return InternalConstantTimeEquals(x, xOffset, y, yOffset, length) != 0;
         }
@@ -84,7 +97,9 @@ namespace MoneroSharp.NaCl
         /// <param name="data">Byte array</param>
         public static void Wipe(byte[] data)
         {
-            Contract.Requires<ArgumentNullException>(data != null);
+            //Contract.Requires<ArgumentNullException>(data != null);
+            if (data == null)
+                throw new ArgumentNullException("Data cannot be null.");
             InternalWipe(data, 0, data.Length);
         }
 
@@ -96,9 +111,15 @@ namespace MoneroSharp.NaCl
         /// <param name="length">Length of byte sequence</param>
         public static void Wipe(byte[] data, int offset, int length)
         {
-            Contract.Requires<ArgumentNullException>(data != null);
-            Contract.Requires<ArgumentOutOfRangeException>(offset >= 0 && length >= 0);
-            Contract.Requires<ArgumentException>(offset + length <= data.Length);
+            // Contract.Requires<ArgumentNullException>(data != null);
+            // Contract.Requires<ArgumentOutOfRangeException>(offset >= 0 && length >= 0);
+            // Contract.Requires<ArgumentException>(offset + length <= data.Length);
+            if (data == null)
+                throw new ArgumentNullException("Data cannot be null.");
+            if (offset < 0 || length < 0)
+                throw new ArgumentOutOfRangeException("Offset and length must be non-negative.");
+            if (offset + length > data.Length)
+                throw new ArgumentException("Offset and length exceed array data length.");
 
             InternalWipe(data, offset, length);
         }
@@ -229,9 +250,11 @@ namespace MoneroSharp.NaCl
         /// <returns>Encoding result</returns>
         public static string Base58Encode(byte[] input)
         {
-            Contract.Requires<ArgumentNullException>(input != null);
-            Contract.Ensures(Contract.Result<string>() != null);
-
+            //Contract.Requires<ArgumentNullException>(input != null);
+            //Contract.Ensures(Contract.Result<string>() != null);
+            if (input == null)
+                throw new ArgumentNullException("Input cannot be null.");
+            
             // Decode byte[] to BigInteger
             BigInteger intData = 0;
             for (int i = 0; i < input.Length; i++)
@@ -263,9 +286,10 @@ namespace MoneroSharp.NaCl
         /// <returns>Byte array</returns>
         public static byte[] Base58Decode(string input)
         {
-            Contract.Requires<ArgumentNullException>(input != null);
-            Contract.Ensures(Contract.Result<byte[]>() != null);
-
+            //Contract.Requires<ArgumentNullException>(input != null);
+            //Contract.Ensures(Contract.Result<byte[]>() != null);
+            if (input == null)
+                throw new ArgumentNullException("Input cannot be null.");
             // Decode Base58 string to BigInteger 
             BigInteger intData = 0;
             for (int i = 0; i < input.Length; i++)

@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using MoneroSharp.NaCl.Internal;
-using System.Diagnostics.Contracts;
+//using System.Diagnostics.Contracts;
 
 namespace MoneroSharp.NaCl
 {
@@ -48,10 +48,16 @@ namespace MoneroSharp.NaCl
         /// <param name="length">Sequence length</param>
         public void Update(byte[] data, int index, int length)
         {
-            Contract.Requires<ArgumentNullException>(data != null);
-            Contract.Requires<ArgumentOutOfRangeException>(index >=0 && length >= 0);
-            Contract.Requires<ArgumentException>((index + length) <= data.Length);
-
+            //Contract.Requires<ArgumentNullException>(data != null);
+            //Contract.Requires<ArgumentOutOfRangeException>(index >=0 && length >= 0);
+            //Contract.Requires<ArgumentException>((index + length) <= data.Length);
+            if (data == null)
+                throw new ArgumentNullException(nameof(data));
+            if (index < 0 || length < 0)
+                throw new ArgumentOutOfRangeException("Index and length must be non-negative.");
+            if (index + length > data.Length)
+                throw new ArgumentException("Index and length exceed data length.");
+            
             Array16<ulong> block;
             int bytesInBuffer = (int)_totalBytes & (BlockSize - 1);
             _totalBytes += (uint)length;
@@ -95,9 +101,13 @@ namespace MoneroSharp.NaCl
         /// <param name="output">Output buffer</param>
         public void Finalize(ArraySegment<byte> output)
         {
-            Contract.Requires<ArgumentNullException>(output.Array != null);
-            Contract.Requires<ArgumentException>(output.Count == 64);
-
+            //Contract.Requires<ArgumentNullException>(output.Array != null);
+            //Contract.Requires<ArgumentException>(output.Count == 64);
+            if (output.Array == null)
+                throw new ArgumentNullException(nameof(output.Array));
+            if (output.Count != 64)
+                throw new ArgumentException("Output count must be 64.");
+            
             Update(_padding, 0, _padding.Length);
             Array16<ulong> block;
             ByteIntegerConverter.Array16LoadBigEndian64(out block, _buffer, 0);
@@ -140,7 +150,9 @@ namespace MoneroSharp.NaCl
         /// <returns>Hash bytes</returns>
         public static byte[] Hash(byte[] data)
         {
-            Contract.Requires<ArgumentNullException>(data != null);
+            //Contract.Requires<ArgumentNullException>(data != null);
+            if (data == null)
+                throw new ArgumentNullException(nameof(data));
             return Hash(data, 0, data.Length);
         }
 
@@ -153,9 +165,15 @@ namespace MoneroSharp.NaCl
         /// <returns>Hash bytes</returns>
         public static byte[] Hash(byte[] data, int index, int length)
         {
-            Contract.Requires<ArgumentNullException>(data != null);
-            Contract.Requires<ArgumentOutOfRangeException>(index >= 0 && length >= 0);
-            Contract.Requires<ArgumentException>((index + length) <= data.Length);
+            //Contract.Requires<ArgumentNullException>(data != null);
+           // Contract.Requires<ArgumentOutOfRangeException>(index >= 0 && length >= 0);
+           // Contract.Requires<ArgumentException>((index + length) <= data.Length);
+           if (data == null)
+               throw new ArgumentNullException(nameof(data));
+           if (index < 0 || length < 0)
+               throw new ArgumentOutOfRangeException("Index and length must be non-negative.");
+           if (index + length > data.Length)
+               throw new ArgumentException("Index and length exceed data length.");
 
             var hasher = new Sha512();
             hasher.Update(data, index, length);
