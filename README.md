@@ -134,7 +134,7 @@ The following call generates a regular Monero signature:
 byte[] sig = RingSig.generate_signature(hash, pub1, sec1);
 ```
 ### Validating signature
-The following call validates ring signature:
+The following call validates the signature:
 ```
 bool sig_is_valid = RingSig.check_signature(hash, pub1, sig);
 ```
