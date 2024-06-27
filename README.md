@@ -65,15 +65,19 @@ In privacy-focused cryptocurrencies like Monero, key images are crucial for bala
 
 By incorporating key images in this way, MystSafe ensures a secure, private, and efficient mechanism for handling data transactions and services within its ecosystem, reinforcing its commitment to user privacy and data security.
 
+## Regular signatures
+Monero’s standard signature mechanism (outside the context of ring signatures) leverages the Ed25519 elliptic curve signature algorithm, but with modifications to enhance privacy and security.
+While the standard Ed25519 is designed for fast and secure digital signatures, Monero’s variant includes specific adaptations to fit the unique requirements of a privacy-focused cryptocurrency. Monero signature implementation adds a randomly generated scalar nonce and uses Keccak hash function (Ed25519 uses SHA512).
+
 ## What can MoneroRing library do?
 MoneroRing contains C# code of cryptographic operations with elliptic curves developed by Monero project and
-required to generate and validate key images and ring signatures, which are the building blocks of private transactions.
+required to generate and validate signatrures, key images, and ring signatures, which are the building blocks of private transactions.
 MoneroRing references and extends MoneroSharp library created by Oğuzhan Eroğlu,
 which implements cryptographic operations with Monero keys and addresses.
 
 ## Unit tests
 The unit tests cover several basic crypto functions and the main ones such as generate_key_image, generate_ring_signature, and check_ring_signature.
-The test data, including expected results, is taken from Monero test data which ensures 100% compatibility of binary inputs and outputs with the original C/C++ implementation.
+The test data, including expected results, is taken from Monero test data which ensures 100% compatibility of binary inputs and outputs with the original C/C++ Monero implementation.
 
 ## Framework versions
 The library supports .NET7.0 and .NET8.0.
@@ -123,6 +127,16 @@ byte[] sig = RingSig.generate_ring_signature(hash, image, pubs, 3, sec2, 1);
 The following call validates ring signature:
 ```
 bool ring_is_valid = RingSig.check_ring_signature(hash, image, pubs, 3, sig);
+```
+### Generating signature
+The following call generates a regular Monero signature:
+```
+byte[] sig = RingSig.generate_signature(hash, pub1, sec1);
+```
+### Validating signature
+The following call validates ring signature:
+```
+bool sig_is_valid = RingSig.check_signature(hash, pub1, sig);
 ```
 ## License
 
