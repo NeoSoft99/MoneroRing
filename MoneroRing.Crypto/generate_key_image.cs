@@ -33,7 +33,8 @@ public static partial class RingSig
         if (sc_check(sec) != 0)
             local_abort("invalid private key");
         hash_to_ec(pub, out point);
-        ge_scalarmult(out point2, ref sec, ref point);
+        //ge_scalarmult(out point2, ref sec, ref point);
+        ge_scalarmult(out point2, sec, ref point);
         GroupOperations.ge_tobytes(image, 0, ref point2);
     }
 

@@ -91,7 +91,8 @@ public static partial class RingSig
                 GroupOperations.ge_scalarmult_base(out tmp3, k, 0);
                 GroupOperations.ge_p3_tobytes(buf.ab[i].a, 0, ref tmp3);
                 hash_to_ec(pubs[i], out tmp3);
-                ge_scalarmult(out tmp2, ref k, ref tmp3);
+                //ge_scalarmult(out tmp2, ref k, ref tmp3);
+                ge_scalarmult(out tmp2, k, ref tmp3);
                 GroupOperations.ge_tobytes(buf.ab[i].b, 0, ref tmp2);
             }
             else

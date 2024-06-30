@@ -39,7 +39,8 @@ public static partial class RingSig
         return (byte)y;
     }
 
-    public static void ge_scalarmult(out GroupElementP2 r, ref byte[] a, ref GroupElementP3 A)
+    //public static void ge_scalarmult(out GroupElementP2 r, ref byte[] a, ref GroupElementP3 A)
+    public static void ge_scalarmult(out GroupElementP2 r, byte[] a, ref GroupElementP3 A)
 	{
         var e = new sbyte[64];
         int carry, carry2, i;
