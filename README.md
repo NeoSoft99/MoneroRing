@@ -138,6 +138,25 @@ The following call validates the signature:
 ```
 bool sig_is_valid = RingSig.check_signature(hash, pub1, sig);
 ```
+### Generating key derivation (shared secret)
+Key derivation is Diffie-Hellman shared secret - Monero style. It can be used in secure message transmission and stealth addresses. The sender creates a shared secret using their secret key and recipient's public key. The recipient can recreate the same shared secret using their private key and public key of the sender. Thus, both sender and recipient has a shared secret which they can use to encrypt and decrypt messages, for example, without ever communicating this secret over the network. 
+
+#### Key derivation example
+```
+byte[] sec1 = new byte[32];
+byte[] pub1 = new byte[32];
+RingSig.generate_keys(pub1, sec1);
+byte[] sec2 = new byte[32];
+byte[] pub2 = new byte[32];
+RingSig.generate_keys(pub2, sec2);
+
+byte[] shared_secret_1 = new byte[32];
+byte[] shared_secret_2 = new byte[32];
+bool result1 = RingSig.generate_key_derivation(pub2, sec1, shared_secret_1);        
+bool result2 = RingSig.generate_key_derivation(pub1, sec2, shared_secret_2);
+      
+Assert.Equal(shared_secret_1, shared_secret_2);
+```
 ## License
 
 MoneroRing library is licensed under MIT License: https://github.com/MystSafe/MoneroRing/blob/main/LICENSE
