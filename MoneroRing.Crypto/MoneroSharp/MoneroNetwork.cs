@@ -6,7 +6,7 @@
  * Copyright (C) 2022, Tabby Labs Inc.
  * Author: Oğuzhan Eroğlu <rohanrhu2@gmail.com> (https://oguzhaneroglu.com)
  *
- * Licensed under MIT (See LICENSE file)
+ * Licensed under MIT (See ORIGINAL LICENSE file)
  */
 
 namespace MoneroSharp

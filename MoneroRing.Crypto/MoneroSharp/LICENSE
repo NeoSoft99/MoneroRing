@@ -1,7 +1,7 @@
-MIT License
+The MIT License (MIT)
 
-Copyright (c) 2022 Tabby Labs Inc.
-Copyright (c) 2022 Oğuzhan Eroğlu <rohanrhu2@gmail.com> (https://oguzhaneroglu.com)
+Copyright (c) 2024 MystSafe (https://mystsafe.com)
+Copyright (c) 2024 crypticana <crypticana@proton.me> 
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -21,5 +21,5 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
-Thirdparty Licenses:
-* MoneroSharp/NaCl/LICENSE
+Parts of the project are originally copyright (c) 2022 Tabby Labs Inc., Oğuzhan Eroğlu <rohanrhu2@gmail.com>,
+distributed under the MIT licence.
