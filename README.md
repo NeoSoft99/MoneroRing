@@ -138,25 +138,105 @@ The following call validates the signature:
 ```
 bool sig_is_valid = RingSig.check_signature(hash, pub1, sig);
 ```
+## Output keys
+The following three methods are used by sender and recipient to send, find, and spend transaction outputs.
+
+These are the parameter names used in the math formulas and sometimes as the variable names in the following code examples:
+
+`r`: Sender’s one-time private key, used to generate the transaction public key R and the shared secret `rA`.  
+`R`: Transaction public key, included in the transaction and used by the recipient to generate the shared secret.  
+`a`: Recipient’s private view key, used to derive the shared secret and confirm the output.  
+`A`: Recipient’s public view key, used by the sender to generate the shared secret.  
+`b`: Recipient’s private spend key, used to derive the shared secret.  
+`B`: Recipient’s public spend key, used by the sender to generate the public key `P`.  
+`P`: Public key for the output, included in the transaction and verified by the recipient.  
+`x`: Private key for the output, derived by the recipient and used to spend by creating the key image and ring signature.  
+
 ### Generating key derivation (shared secret)
-Key derivation is Diffie-Hellman shared secret - Monero style. It can be used in secure message transmission and stealth addresses. The sender creates a shared secret using their secret key and recipient's public key. The recipient can recreate the same shared secret using their private key and public key of the sender. Thus, both sender and recipient has a shared secret which they can use to encrypt and decrypt messages, for example, without ever communicating this secret over the network. 
+Method `generate_key_derivation` is used by both sender and recipient to generate a Diffie-Hellman shared secret - Monero style. It can be used in secure message transmission and stealth addresses. The sender creates a shared secret using their secret key and recipient's public key. The recipient can recreate the same shared secret using their private key and public key of the sender. Thus, both sender and recipient has a shared secret which they can use to encrypt and decrypt messages, for example, without ever communicating this secret over the network. 
 
-#### Key derivation example
+Parameters:  
+`rA` and `aR` are the shared secret (depending on which side - sender or recipient - the calculatiion is performed).  
+`r`: Sender’s one-time private key, used to generate the transaction public key R and the shared secret `rA`.  
+`R`: Transaction public key, included in the transaction and used by the recipient to generate the shared secret.  
+`a`: Recipient’s private view key, used to derive the shared secret and confirm the output.  
+`A`: Recipient’s public view key, used by the sender to generate the shared secret.  
+
+Example:  
 ```
-byte[] sec1 = new byte[32];
-byte[] pub1 = new byte[32];
-RingSig.generate_keys(pub1, sec1);
-byte[] sec2 = new byte[32];
-byte[] pub2 = new byte[32];
-RingSig.generate_keys(pub2, sec2);
+byte[] a = new byte[32];
+byte[] A = new byte[32];
+RingSig.generate_keys(A, a);
 
-byte[] shared_secret_1 = new byte[32];
-byte[] shared_secret_2 = new byte[32];
-bool result1 = RingSig.generate_key_derivation(pub2, sec1, shared_secret_1);        
-bool result2 = RingSig.generate_key_derivation(pub1, sec2, shared_secret_2);
+byte[] r = new byte[32];
+byte[] R = new byte[32];
+RingSig.generate_keys(R, r);
+
+byte[] rA = new byte[32];
+bool result1 = RingSig.generate_key_derivation(A, r, rA);    
+
+byte[] aR = new byte[32];
+bool result2 = RingSig.generate_key_derivation(R, a, aR);
       
-Assert.Equal(shared_secret_1, shared_secret_2);
+Assert.Equal(rA, aR);
 ```
+
+### Deriving public key P (stealth address) 
+Method `derive_public_key` is used by the sender to calculate `P = Hs(rA)G+B` which is known as output stealth address. 
+
+Parameters:  
+`derivation` is the shared secret `rA` or `aR` (depending on which side - sender or recipient - the calculatiion is performed).  
+`output_index` specifies the output position in the transaction.  
+`B` (base) is the recipient’s public spend key `B`.  
+`P` is the derived key - output public key `P`.
+
+Example:
+```
+byte[] a = new byte[32];
+byte[] A = new byte[32];
+RingSig.generate_keys(A, a);
+byte[] b = new byte[32];
+byte[] B = new byte[32];
+RingSig.generate_keys(B, b);
+byte[] r = new byte[32];
+byte[] R = new byte[32];
+RingSig.generate_keys(R, r);
+
+byte[] derivation = new byte[32];
+bool result_shared_secret = RingSig.generate_key_derivation(A, r, derivation);
+
+uint output_index = 0;
+byte[] P = new byte[32];
+bool result = RingSig.derive_public_key(shared_secret_1, outputIndex, B, P);
+```
+### Testing public key P by the recipient
+Method `derive_public_key` also used by the recipient to calculate `P = Hs(aR)G+B` to determine whether the output belongs to the recipient. 
+
+Parameters:  
+`derivation` is the shared secret aR (since the recipient knows their private view key `a` and transaction public key `R`).  
+`output_index` specifies the output position in the transaction.  
+`B` (base) is the recipient’s public spend key `B`.  
+`P1` is the resulting key that can be compared to the output public key `P`. If they match, this output belongs to the recipient and can be spent.  
+
+Example:
+```
+byte[] P1 = new byte[32];
+bool result = RingSig.derive_public_key(shared_secret_2, outputIndex, B, P1);
+```
+### Deriving secret key x (output spending key)
+Method `derive_secret_key` is used by recipient to get the output private key `x` which can be used to spend the output: `x = Hs(aR) + b`.  
+Parameters:  
+`derivation` is the shared secret `aR`.  
+`output_index` specifies the output position in the transaction.  
+`b` is the recipient’s private spend key `b`.  
+`x` is the resulting private output key `x`.  
+
+Example:
+```
+byte[] x = new byte[32];
+RingSig.derive_secret_key(derivation, outputIndex, b, x);
+```
+
 ## License
 
 MoneroRing library is licensed under MIT License: https://github.com/MystSafe/MoneroRing/blob/main/LICENSE
