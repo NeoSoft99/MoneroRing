@@ -1,6 +1,6 @@
 # MoneroRing
 
-MoneroRing is 100% .NET C# implementation of Monero keys, shared secrets, signatures, ring signatures, and key images.
+MoneroRing is 100% .NET C# managed code implementation of Monero keys, shared secrets, signatures, ring signatures, and key images.
 
 ## What is ring signature?
 
