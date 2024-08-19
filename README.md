@@ -88,17 +88,12 @@ Key images are a fundamental component in certain cryptographic protocols, parti
 
 **Uniqueness:** The key image is unique to each private key but does not reveal the identity of the key holder. It is impossible to derive the private key from the key image, preserving the security of the key holder's identity.  
 
-**Role in preventing double-spending:** In cryptocurrencies, the key image is used to ensure that each piece of a digital token can be spent only once. When a transaction is initiated, the key image is recorded on the blockchain. Network participants can check this list of key images to verify that no previous transaction has included the same key image, thereby preventing double-spending while maintaining user anonymity.  
-
 **Verification:** Though the key image prevents the reuse of output (tokens), it does not compromise the anonymity provided by ring signatures. The network verifies that the key image corresponds to a valid ring signature without revealing which group member's key was used to generate it.
 
 ### Importance in privacy-centric cryptocurrencies
 In privacy-focused cryptocurrencies like Monero, key images are crucial for balancing anonymity with the integrity of the transaction system. They allow the network to verify the legitimacy of transactions without linking them back to individual users’ identities, thereby supporting both privacy and security.
 
-## Application of key images in MystSafe
-**License token transactions:** In [MystSafe](https://mystsafe.com), each license token (representing the right to use services such as data storage or transmission) is associated with a unique key image. This key image is generated from the private key of the license holder, who initiates the transaction.  
-
-**Prevention of double-spending:** When a user performs a data transaction—such as transferring a license token to another account or using it to access a service—the key image for that token is recorded on MystSafe’s ledger. This ledger allows to verify that each key image has not been used before, thereby ensuring that each license token is spent only once.  
+**Role in preventing double-spending:** In cryptocurrencies, the key image is used to ensure that each piece of a digital token can be spent only once. When a transaction is initiated, the key image is recorded on the blockchain. Network participants can check this list of key images to verify that no previous transaction has included the same key image, thereby preventing double-spending while maintaining user anonymity.  
 
 **Maintaining anonymity:** Although the key image is unique and prevents the token from being reused, it does not reveal the identity of the user. This is because the key image, while derived from a user's private key, does not expose the key itself. This setup allows MystSafe to maintain user anonymity, a core aspect of its privacy-focused architecture.  
 
@@ -219,5 +214,4 @@ The unit tests cover several basic crypto functions and the main methods.
 The test data, including expected results, is taken from Monero test data which ensures 100% compatibility of binary inputs and outputs with the original C/C++ Monero implementation.
 ### Framework versions
 The library supports .NET7.0 and .NET8.0.
-### License
-MoneroRing library is licensed under MIT License: [https://github.com/MystSafe/MoneroRing/blob/main/LICENSE](https://github.com/MystSafe/MoneroRing/blob/main/MoneroRing.Crypto/LICENSE)
+
