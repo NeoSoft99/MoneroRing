@@ -95,11 +95,10 @@ In privacy-focused cryptocurrencies like Monero, key images are crucial for bala
 
 **Role in preventing double-spending:** In cryptocurrencies, the key image is used to ensure that each piece of a digital token can be spent only once. When a transaction is initiated, the key image is recorded on the blockchain. Network participants can check this list of key images to verify that no previous transaction has included the same key image, thereby preventing double-spending while maintaining user anonymity.  
 
-**Maintaining anonymity:** Although the key image is unique and prevents the token from being reused, it does not reveal the identity of the user. This is because the key image, while derived from a user's private key, does not expose the key itself. This setup allows MystSafe to maintain user anonymity, a core aspect of its privacy-focused architecture.  
+**Maintaining anonymity:** Although the key image is unique and prevents the token from being reused, it does not reveal the identity of the user. This is because the key image, while derived from a user's private key, does not expose the key itself.  
 
-**Role in ring signatures:** MystSafe utilizes ring signatures to obscure the specifics of transaction participants. The key image is a critical component in these signatures, ensuring that while the group of possible signers (public keys) is visible, the actual signer (and thus the spender of the license token) remains anonymous. The presence of the key image in the transaction verifies that the signature is valid and the license token has not been spent previously, without linking back to any specific user.
+**Role in ring signatures:** The key image is a critical component in these signatures, ensuring that while the group of possible signers (public keys) is visible, the actual signer (and thus the spender of the license token) remains anonymous. The presence of the key image in the transaction verifies that the signature is valid and the license token has not been spent previously, without linking back to any specific user.
 
-By incorporating key images in this way, MystSafe ensures a secure, private, and efficient mechanism for handling data transactions and services within its ecosystem, reinforcing its commitment to user privacy and data security.
 ### Generating key image
 The following example generates a key image of the given key:
 ```
