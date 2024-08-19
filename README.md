@@ -66,14 +66,7 @@ In Monero, ring signatures play a crucial role in maintaining privacy and anonym
 **Resistance to analysis:** By using ring signatures, Monero complicates blockchain analysis, making it extremely difficult for analysts to draw correlations between transactions. This is especially beneficial for users in regions where financial transactions are heavily monitored or where financial privacy is paramount.
 
 In summary, ring signatures are essential to Monero's architecture, providing a robust method of preserving privacy by hiding the sender's identity in a group of potential signers. This makes Monero an attractive option for users seeking confidentiality in their digital transactions.
-### Ring signatures in MystSafe
-In [MystSafe](https://mystsafe.com), ring signatures are used to enhance the privacy and security of its licensing model. Here's how they are specifically implemented:
 
-**License token system:** MystSafe utilizes crypto tokens as licenses for transactions within its network. These tokens are unique to each transaction, ensuring that they cannot be reused, which aligns with the non-reusability feature of ring signatures.  
-
-**Enhanced privacy:** By integrating ring signatures, MystSafe allows users to conduct data operations without revealing which account initiated them. This is achieved by obscuring the sender among a group of potential signers, thereby protecting user identities.  
-
-**Isolating payments from user activities:** Ring signatures enable the cryptographic separation of the license from the payment process. This means that even if the payment for premium license is made through methods that could reveal identity, such as credit cards, your identity cannot be linked back to the account or the data blocks.
 ### Generating ring signature
 The following call generates a ring signature, with the key image, actual key at the second position, and two "decoy" public keys as the input:
 ```
